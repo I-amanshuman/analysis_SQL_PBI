@@ -1,0 +1,33 @@
+-- Cleansed fact internet sales table --
+SELECT [ProductKey]
+      ,[OrderDateKey]
+      ,[DueDateKey]
+      ,[ShipDateKey]
+      ,[CustomerKey]
+      --,[PromotionKey]
+      --,[CurrencyKey]
+      --,[SalesTerritoryKey]
+      ,[SalesOrderNumber]
+      --,[SalesOrderLineNumber]
+      --,[RevisionNumber]
+      --,[OrderQuantity]
+      --,[UnitPrice]
+      --,[ExtendedAmount]
+      --,[UnitPriceDiscountPct]
+      --,[DiscountAmount]
+      --,[ProductStandardCost]
+      --,[TotalProductCost]
+      ,[SalesAmount]
+      --,[TaxAmt]
+      --,[Freight]
+      --,[CarrierTrackingNumber]
+      --,[CustomerPONumber]
+      --,[OrderDate]
+      --,[DueDate]
+      --,[ShipDate]
+	  ,LEFT(OrderDateKey,4) as [Order_Year]
+  FROM [AdventureWorksDW2019].[dbo].[FactInternetSales]
+  --Since only 4 years are considered here
+  WHERE left(OrderDateKey, 4)>= year(getdate())-4 --This ensures that only the last 4 years are selected
+  order by OrderDateKey asc;
+
